@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. CCS Regulatory Guide — 6-State Dashboard | North American CCS Regulatory Series</title>
+<meta name="description" content="Comprehensive interactive guide to Carbon Capture and Storage (CCS) regulations across Texas, Louisiana, California, Illinois, North Dakota, and South Dakota. Covers Class VI primacy, state agencies, federal requirements, 45Q tax credits, and PHMSA pipeline safety.">
+<meta property="og:title" content="U.S. CCS Regulatory Dashboard — North American CCS Regulatory Series">
+<meta property="og:description" content="Interactive regulatory guide covering CCS operations across 6 U.S. states with federal framework analysis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0B0E11;
+  --bg-card: #13171C;
+  --bg-card-hover: #1A1F26;
+  --bg-surface: #1A1F26;
+  --border: #2A3040;
+  --border-light: #353D4F;
+  --text: #E8ECF1;
+  --text-secondary: #8B95A5;
+  --text-dim: #5A6478;
+  --accent-tx: #F59E0B;
+  --accent-la: #10B981;
+  --accent-ca: #6366F1;
+  --accent-il: #EC4899;
+  --accent-nd: #3B82F6;
+  --accent-sd: #F97316;
+  --cat-capture: #14B8A6;
+  --cat-pipeline: #3B82F6;
+  --cat-sequestration: #8B5CF6;
+  --path-classvi: #F59E0B;
+  --path-state: #10B981;
+  --path-federal: #6366F1;
+  --gold: #F59E0B;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 80px 24px 60px;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-series {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #F8FAFC, #94A3B8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--gold);
+}
+.hero-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+.hero-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.hero-author a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+.hero-author a:hover { text-decoration: underline; }
+
+/* CONTAINER */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* STATE SELECTOR */
+.state-selector-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.state-card {
+  position: relative;
+  padding: 16px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+.state-card:hover { background: var(--bg-card-hover); border-color: var(--border-light); }
+.state-card.active { border-color: var(--state-accent, var(--gold)); }
+.state-card.active::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--state-accent, var(--gold));
+}
+.state-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.state-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+}
+.state-flag { font-size: 22px; }
+.primacy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.primacy-badge.granted {
+  background: rgba(16,185,129,0.15);
+  color: #34D399;
+  border: 1px solid rgba(16,185,129,0.25);
+}
+.primacy-badge.epa {
+  background: rgba(99,102,241,0.15);
+  color: #818CF8;
+  border: 1px solid rgba(99,102,241,0.25);
+}
+.primacy-badge.restrictive {
+  background: rgba(249,115,22,0.15);
+  color: #FB923C;
+  border: 1px solid rgba(249,115,22,0.25);
+}
+.state-meta {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* STATE INFO PANEL */
+.state-info-panel {
+  display: none;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+  animation: fadeIn 0.3s ease;
+}
+.state-info-panel.visible { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.info-card {
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.info-card-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.info-card-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.info-card-detail {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.info-card-detail a {
+  color: var(--gold);
+  text-decoration: none;
+}
+.info-card-detail a:hover { text-decoration: underline; }
+
+/* NAVIGATION TABS */
+.nav-section {
+  padding: 32px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.nav-group { flex: 1; min-width: 200px; }
+.nav-group-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-tab {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text); background: var(--bg-card); }
+.nav-tab.active {
+  color: var(--text);
+  background: var(--bg-card);
+  border-color: var(--border-light);
+}
+.nav-tab.active[data-cat="capture"] { border-top: 2px solid var(--cat-capture); }
+.nav-tab.active[data-cat="pipeline"] { border-top: 2px solid var(--cat-pipeline); }
+.nav-tab.active[data-cat="sequestration"] { border-top: 2px solid var(--cat-sequestration); }
+.nav-tab.active[data-path="classvi"] { border-top: 2px solid var(--path-classvi); }
+.nav-tab.active[data-path="state"] { border-top: 2px solid var(--path-state); }
+.nav-tab.active[data-path="federal"] { border-top: 2px solid var(--path-federal); }
+
+/* SEARCH & CONTROLS */
+.controls-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 20px 0;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 240px;
+  padding: 10px 16px 10px 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box:focus { border-color: var(--gold); }
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+.search-wrap::before {
+  content: '⌕';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--text-dim);
+}
+.ctrl-btn {
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.ctrl-btn:hover { border-color: var(--border-light); color: var(--text); }
+.reg-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+/* REGULATION CARDS */
+.reg-list { padding-bottom: 40px; }
+.reg-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.reg-card:hover { border-color: var(--border-light); }
+.reg-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.reg-expand {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: transform 0.2s;
+}
+.reg-card.open .reg-expand { transform: rotate(90deg); }
+.reg-header-content { flex: 1; min-width: 0; }
+.reg-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.reg-agency {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.reg-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.reg-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.reg-tag.capture { background: rgba(20,184,166,0.15); color: #2DD4BF; }
+.reg-tag.pipeline { background: rgba(59,130,246,0.15); color: #60A5FA; }
+.reg-tag.sequestration { background: rgba(139,92,246,0.15); color: #A78BFA; }
+.reg-tag.federal { background: rgba(99,102,241,0.12); color: #818CF8; }
+.reg-tag.state { background: rgba(16,185,129,0.12); color: #34D399; }
+.reg-tag.classvi { background: rgba(245,158,11,0.12); color: #FBBF24; }
+.reg-tag.incentive { background: rgba(236,72,153,0.12); color: #F472B6; }
+
+.reg-body {
+  display: none;
+  padding: 0 20px 16px 52px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.reg-card.open .reg-body { display: block; }
+.reg-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  color: var(--gold);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.reg-link:hover { text-decoration: underline; }
+
+/* FEDERAL SECTION */
+.federal-section {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.federal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.federal-card {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--path-federal);
+}
+.federal-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.federal-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.highlight-box {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(245,158,11,0.05);
+  border: 1px solid rgba(245,158,11,0.15);
+  border-radius: var(--radius-sm);
+}
+.highlight-box .hl-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  font-weight: 600;
+}
+.highlight-box .hl-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  color: var(--text);
+  margin-top: 2px;
+}
+.highlight-box .hl-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+footer .footer-author {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+footer .footer-author a { color: var(--gold); text-decoration: none; }
+footer .footer-author a:hover { text-decoration: underline; }
+footer .footer-series {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+footer .disclaimer {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* SCROLL TOP */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scroll-top.visible { opacity: 1; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero { padding: 50px 16px 40px; }
+  .state-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-row { flex-direction: column; gap: 12px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .federal-grid { grid-template-columns: 1fr; }
+  .reg-card-header { flex-direction: column; }
+  .reg-tags { margin-top: 8px; }
+}
+@media (max-width: 480px) {
+  .state-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-series">★ North American CCS Regulatory Series — United States</div>
+  <h1>U.S. CCS Regulatory Dashboard</h1>
+  <p class="hero-sub">Comprehensive interactive guide to Carbon Capture &amp; Storage regulations across six states — covering Class VI primacy, state agencies, federal requirements, 45Q tax credits, and pipeline safety standards.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">6</div><div class="hero-stat-label">States Covered</div></div>
+    <div class="hero-stat"><div class="hero-stat-num" id="totalRegCount">150+</div><div class="hero-stat-label">Regulations</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Primacy States</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">$85–180</div><div class="hero-stat-label">45Q $/ton</div></div>
+  </div>
+  <div class="hero-author">
+    Prepared by <a href="https://linkedin.com/in/tahirhusen/" target="_blank" rel="noopener">Tahir Chisti, P.Eng, MAsc.</a> &middot; <a href="https://linkedin.com/in/tahirhusen/" target="_blank" rel="noopener">LinkedIn →</a>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- STATE SELECTOR -->
+<section class="state-selector-section">
+  <div class="section-label">Select a State</div>
+  <div class="state-grid" id="stateGrid"></div>
+</section>
+
+<!-- STATE INFO PANEL -->
+<section class="state-info-panel" id="stateInfoPanel"></section>
+
+<!-- 45Q & FEDERAL INCENTIVES -->
+<section class="federal-section">
+  <div class="section-label">Federal Framework &amp; Incentives</div>
+  <div class="federal-grid">
+    <div class="federal-card">
+      <h3>Section 45Q Tax Credit (post-OBBBA)</h3>
+      <p>The One Big Beautiful Bill Act (July 4, 2025) preserved and enhanced the 45Q credit. All end-uses now receive parity at the full sequestration rate. No changes to the credit timeline — facilities must begin construction by end of 2032. Direct pay available for first 5 years. Transferability maintained except to specified foreign entities. FEOC restrictions apply to facilities placed in service after July 4, 2025.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+        <div class="highlight-box"><div class="hl-label">Point-Source Capture</div><div class="hl-val">$85/ton</div><div class="hl-note">$17 base × 5x PWA multiplier</div></div>
+        <div class="highlight-box"><div class="hl-label">Direct Air Capture</div><div class="hl-val">$180/ton</div><div class="hl-note">$36 base × 5x PWA multiplier</div></div>
+      </div>
+    </div>
+    <div class="federal-card">
+      <h3>EPA Class VI UIC Program</h3>
+      <p>Under the Safe Drinking Water Act, Class VI wells are exclusively for long-term geologic sequestration of CO₂. EPA administers permits in non-primacy states; 6 states now have primacy (ND, WY, LA, WV, AZ, TX). Currently ~130+ pending applications at EPA. Primacy states report faster permitting (under 12 months vs. 24+ months at EPA). EPA retains oversight authority and independent enforcement powers even in primacy states.</p>
+      <div class="highlight-box"><div class="hl-label">Current Primacy States</div><div class="hl-val" style="font-size:14px;">ND · WY · LA · WV · AZ · TX</div><div class="hl-note">9 more states in application process</div></div>
+    </div>
+    <div class="federal-card">
+      <h3>PHMSA CO₂ Pipeline Safety (49 CFR 195)</h3>
+      <p>PHMSA issued a comprehensive NPRM (Jan 2025) to strengthen CO₂ pipeline standards — including first-ever gaseous-phase CO₂ regulations, leak detection systems, vapor dispersion analyses, 48-inch minimum cover depth, and emergency response coordination. The rulemaking is under review by the Trump administration. A separate ANPRM (June 2025) seeks feedback on eliminating undue burdens. California has an active pipeline moratorium pending PHMSA final rule. Illinois SAFE CCS Act imposed a 2-year pipeline moratorium (until July 2026).</p>
+    </div>
+    <div class="federal-card">
+      <h3>EPA Subpart RR — GHG Reporting</h3>
+      <p>40 CFR Part 98 Subpart RR requires facilities that inject CO₂ for geologic sequestration to report annually to EPA. Includes Monitoring, Reporting, and Verification (MRV) plan approval. Reports include mass of CO₂ injected, produced, emitted, and sequestered. Critical for 45Q tax credit qualification. EPA has proposed scaling back GHGRP which could complicate net carbon removal demonstrations. Subpart PP covers CO₂ suppliers; Subpart UU covers CO₂ injection.</p>
+    </div>
+    <div class="federal-card">
+      <h3>NEPA &amp; Clean Air Act</h3>
+      <p>National Environmental Policy Act review required for federal actions (including Class VI permits issued by EPA, DOE-funded projects). Environmental Impact Statements or Environmental Assessments may be required. Clean Air Act applies to capture facilities — New Source Review/PSD permits for new or modified major sources. Title V operating permits for major facilities. NSPS standards may apply to specific source categories.</p>
+    </div>
+    <div class="federal-card">
+      <h3>DOE Programs &amp; IIJA Funding</h3>
+      <p>Infrastructure Investment and Jobs Act (2021) provided $12B+ for CCS: $3.5B for regional DAC hubs, $2.5B for carbon storage validation/testing, $2.1B for CCUS demonstrations, $25M for EPA Class VI administration. CarbonSAFE program for storage site characterization. Regional Carbon Sequestration Partnerships. Note: Trump administration terminated 24 DOE projects in May 2025, generating $3B+ in cited savings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIGATION -->
+<section class="nav-section" id="navSection">
+  <div class="nav-row">
+    <div class="nav-group">
+      <div class="nav-group-label">By CCS Category</div>
+      <div class="nav-tabs" id="catTabs">
+        <button class="nav-tab active" data-cat="all">All Categories</button>
+        <button class="nav-tab" data-cat="capture">Capture</button>
+        <button class="nav-tab" data-cat="pipeline">Pipeline</button>
+        <button class="nav-tab" data-cat="sequestration">Sequestration</button>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-label">By Regulatory Pathway</div>
+      <div class="nav-tabs" id="pathTabs">
+        <button class="nav-tab active" data-path="all">All Pathways</button>
+        <button class="nav-tab" data-path="classvi">Class VI / UIC</button>
+        <button class="nav-tab" data-path="state">State Permits</button>
+        <button class="nav-tab" data-path="federal">Federal</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls-bar">
+  <div class="search-wrap">
+    <input type="text" class="search-box" id="searchBox" placeholder="Search regulations, agencies, keywords...">
+  </div>
+  <button class="ctrl-btn" id="expandAll">Expand All</button>
+  <button class="ctrl-btn" id="collapseAll">Collapse All</button>
+  <span class="reg-count" id="regCount"></span>
+</div>
+
+<!-- REGULATION LIST -->
+<div class="reg-list" id="regList"></div>
+
+</div><!-- container -->
+
+<footer>
+  <div class="footer-author">
+    <a href="https://linkedin.com/in/tahirhusen/" target="_blank" rel="noopener">Tahir Chisti, P.Eng, MAsc.</a>
+  </div>
+  <div class="footer-series">North American CCS Regulatory Series &middot; United States Edition &middot; Last updated March 2026</div>
+  <div class="disclaimer">
+    This guide is for informational purposes only and does not constitute legal, regulatory, or engineering advice. Regulations are subject to change. Always consult the official regulatory agencies and qualified legal counsel for project-specific compliance requirements. The author assumes no liability for decisions made based on information presented herein.
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script>
+// ==========================================
+// DATA — STATES
+// ==========================================
+const STATES = {
+  TX: {
+    name: 'Texas',
+    abbr: 'TX',
+    flag: '🤠',
+    accent: '#F59E0B',
+    primacy: 'granted',
+    primacyLabel: 'Class VI Primacy',
+    primacyDate: 'Dec 15, 2025',
+    regulator: 'Railroad Commission of Texas (RRC)',
+    regulatorUrl: 'https://www.rrc.texas.gov/',
+    storageCapacity: 'Vast — Gulf Coast saline formations',
+    keyProjects: '18 pending Class VI applications transferred from EPA',
+    poreSpace: 'Surface owner (Myers-Woodward, TX Sup. Ct. May 2025)',
+    liability: 'No state liability transfer mechanism yet (SB 2107 died in committee)',
+    notes: 'HB 1284 (2021) gave RRC sole jurisdiction over CCS wells. RRC projects ~6-month permit-to-drill and ~6-month authorization to inject. TCEQ retains air/water/waste authority at capture facilities. Texas Supreme Court confirmed surface owner pore space in May 2025.'
+  },
+  LA: {
+    name: 'Louisiana',
+    abbr: 'LA',
+    flag: '⚜️',
+    accent: '#10B981',
+    primacy: 'granted',
+    primacyLabel: 'Class VI Primacy',
+    primacyDate: 'Jan 2024',
+    regulator: 'Dept. of Conservation & Energy (LDCE)',
+    regulatorUrl: 'https://www.dnr.louisiana.gov/',
+    storageCapacity: 'Extensive — Gulf Coast, favorable geology',
+    keyProjects: 'Hackberry CCS (1st LA-issued permit, Sep 2025), 33 pending apps',
+    poreSpace: 'Surface owner (La. Civ. Code art. 490) — litigation ongoing (Save My Louisiana v. State)',
+    liability: 'Trust fund model — operator pays in, state assumes post-closure liability (R.S. 30:1109)',
+    notes: 'Oct 2025 moratorium on NEW Class VI applications (EO JML 25-119). 5 priority projects proceeding. 2025 Legislature passed Acts 407, 414, 458 enhancing local government input, Landowner Bill of Rights, transparency. Eminent domain restricted to "common carrier" CO₂ pipelines (June 2025). Fifth Circuit dismissed primacy challenge (Deep South v. EPA).'
+  },
+  CA: {
+    name: 'California',
+    abbr: 'CA',
+    flag: '🐻',
+    accent: '#6366F1',
+    primacy: 'epa',
+    primacyLabel: 'EPA Administered',
+    primacyDate: 'No primacy application',
+    regulator: 'CARB / CalGEM / CNRA',
+    regulatorUrl: 'https://ww2.arb.ca.gov/',
+    storageCapacity: '~200 Gt assessed (Central Valley, offshore)',
+    keyProjects: 'No operating CCS projects yet; ~20 Class VI apps pending at EPA',
+    poreSpace: 'Not explicitly addressed by statute',
+    liability: 'No state liability transfer framework',
+    notes: 'SB 905 (2022) authorized CARB, CNRA, DOC to develop CCS regulatory framework. 2022 Scoping Plan targets 100 Mt/yr CCS by 2045. LCFS CCS Protocol provides Permanence Certification and credit mechanism. LCFS amendments (July 2025): 30% CI reduction by 2030, 90% by 2045. CO₂ pipeline moratorium pending PHMSA final rule. Class VI primacy question unresolved. Second-largest number of pending EPA Class VI applications.'
+  },
+  IL: {
+    name: 'Illinois',
+    abbr: 'IL',
+    flag: '🏭',
+    accent: '#EC4899',
+    primacy: 'epa',
+    primacyLabel: 'EPA Administered',
+    primacyDate: 'No primacy application',
+    regulator: 'Illinois EPA / Commerce Commission (ICC)',
+    regulatorUrl: 'https://epa.illinois.gov/',
+    storageCapacity: '~150 Gt (Illinois Basin, Mt. Simon Sandstone)',
+    keyProjects: 'ADM Decatur CCS (1 Mt stored), ADM IL-ICCS (1 Mt/yr operational)',
+    poreSpace: 'Surface owner (SAFE CCS Act, Aug 2024) — 75% landowner consent required',
+    liability: 'Operator retains all liability — no state assumption',
+    notes: 'SAFE CCS Act (eff. Jan 1, 2025): state permit required from IL EPA on top of federal Class VI. 2-year CO₂ pipeline moratorium (until PHMSA finalizes rules or July 2026). ICC certificate of authority required for pipelines. Emergency response authority assigned to IL Emergency Management Agency. ADM Decatur CO₂ leak incident (2024) prompted HB 5874 sole-source aquifer protections. Champaign County 12-month CCS moratorium near Mahomet Aquifer (Jan 2025).'
+  },
+  ND: {
+    name: 'North Dakota',
+    abbr: 'ND',
+    flag: '🦬',
+    accent: '#3B82F6',
+    primacy: 'granted',
+    primacyLabel: 'Class VI Primacy',
+    primacyDate: 'Apr 24, 2018',
+    regulator: 'ND Industrial Commission / Dept. of Mineral Resources',
+    regulatorUrl: 'https://www.dmr.nd.gov/',
+    storageCapacity: 'Large — Williston Basin, Broom Creek & Deadwood formations',
+    keyProjects: 'Red Trail Energy (180k t/yr, injecting since June 2022), Project Tundra (4 Mt/yr), Blue Flint Ethanol, 4 approved CCS facilities',
+    poreSpace: 'Surface owner by statute (NDCC 47-31.1) — severance prohibited',
+    liability: 'State liability transfer after 10 years post-closure + trust fund',
+    notes: 'FIRST state to receive Class VI primacy (2018). FIRST state-issued Class VI well permit. First-ever CCS regulations promulgated April 2010. Storage Facility Permit (SFP) required before Class VI application. Pore space amalgamation via NDIC order (60% consent threshold). 8 permits issued under primacy. Monthly Form 26/26A injection reporting.'
+  },
+  SD: {
+    name: 'South Dakota',
+    abbr: 'SD',
+    flag: '🌾',
+    accent: '#F97316',
+    primacy: 'restrictive',
+    primacyLabel: 'Restrictive Framework',
+    primacyDate: 'No primacy — eminent domain banned',
+    regulator: 'SD Public Utilities Commission (PUC) / DENR',
+    regulatorUrl: 'https://puc.sd.gov/',
+    storageCapacity: 'Limited in-state — primarily a pipeline transit state',
+    keyProjects: 'Summit Carbon Solutions pipeline denied (Apr 2025)',
+    poreSpace: 'Not explicitly addressed by statute',
+    liability: 'No CCS-specific liability framework',
+    notes: 'March 2025: Gov. Rhoden signed HB 1052 banning eminent domain for CO₂ pipelines. April 2025: PUC denied Summit Carbon Solutions pipeline permit. Summit proposed $9B, 2,500-mile, 5-state CO₂ pipeline to ND storage. Voters defeated 2024 compromise bill; 14 Republican incumbents lost primaries over CCS eminent domain. HJR 5001 (2025) would constitutionally ban eminent domain for CO₂ pipelines. Primarily transit state for CO₂ pipelines to ND storage, not a storage destination.'
+  }
+};
+
+// ==========================================
+// DATA — REGULATIONS
+// ==========================================
+const REGS = [
+  // ============ TEXAS ============
+  {state:'TX',cat:'sequestration',path:'classvi',title:'16 TAC Chapter 5 — Class VI UIC Permit (RRC)',agency:'Railroad Commission of Texas',body:'Texas Administrative Code Title 16, Chapter 5 implements the Class VI UIC program under RRC primacy (effective Dec 15, 2025). Requires comprehensive permit application including geologic characterization, AoR modeling, well construction standards, Testing and Monitoring Plan, injection well MIT, Emergency & Remedial Response Plan, and post-injection site care (PISC). RRC projects ~6-month permit-to-drill review and ~6-month authorization to inject.',url:'https://www.rrc.texas.gov/'},
+  {state:'TX',cat:'sequestration',path:'state',title:'Texas Water Code §27.041 — CCS Well Jurisdiction',agency:'Texas Legislature / RRC',body:'HB 1284 (2021) consolidated jurisdiction for all CO₂ injection wells (Class II EOR and Class VI CCS) under the Railroad Commission of Texas. Previously jurisdiction was split between RRC and TCEQ. Directed RRC to seek Class VI primacy from EPA. Foundation statute for Texas CCS regulatory framework.',url:'https://statutes.capitol.texas.gov/'},
+  {state:'TX',cat:'sequestration',path:'state',title:'Texas Natural Resources Code Ch. 120 — Geologic Storage',agency:'RRC',body:'Authorizes the Railroad Commission to issue geologic storage facility permits for anthropogenic CO₂ injection. Establishes the Anthropogenic Carbon Dioxide Storage Trust Fund for long-term monitoring. Requires site closure plan, financial assurance, and post-injection monitoring. RRC maintains oversight throughout injection and post-closure periods.',url:'https://statutes.capitol.texas.gov/'},
+  {state:'TX',cat:'sequestration',path:'state',title:'Pore Space Ownership — Myers-Woodward (TX Sup. Ct. 2025)',agency:'Texas Supreme Court',body:'In May 2025, the Texas Supreme Court held that the surface estate owner controls subsurface pore space (including salt caverns) unless expressly conveyed. Follows the American Rule. SB 2107 (88th Legislature) attempted to codify surface owner pore space ownership but died in committee. Current law: surface owner owns pore space by case law, not statute. No forced pooling/integration mechanism yet.',url:'https://natlawreview.com/article/texas-ccs-landscape-shifts-class-vi-primacy-and-clearer-pore-space-ownership-rules'},
+  {state:'TX',cat:'capture',path:'state',title:'TCEQ Air Quality Permits — Capture Facilities',agency:'Texas Commission on Environmental Quality (TCEQ)',body:'Capture facilities require TCEQ air quality permits including New Source Review (NSR), Prevention of Significant Deterioration (PSD) for major sources, and Title V operating permits. TCEQ retains enforcement authority for air, water, and waste at capture and compression facilities even after RRC Class VI primacy. State Implementation Plan applies.',url:'https://www.tceq.texas.gov/'},
+  {state:'TX',cat:'capture',path:'federal',title:'Clean Air Act — NSR/PSD Permits',agency:'EPA / TCEQ',body:'New or modified major stationary sources (capture facilities) must obtain NSR/PSD permits demonstrating Best Available Control Technology. Applies to criteria pollutants and GHGs above major source thresholds. TCEQ administers federal CAA programs in Texas under delegation.',url:'https://www.epa.gov/nsr'},
+  {state:'TX',cat:'pipeline',path:'state',title:'Texas Natural Resources Code — CO₂ Pipeline Regulation',agency:'RRC',body:'RRC regulates intrastate CO₂ pipelines under existing oil and gas pipeline authority. Pipeline permits, safety inspections, and incident reporting. Texas does not have a CO₂-specific pipeline siting statute. Eminent domain available for common carrier CO₂ pipelines under Texas law — no legislative ban (unlike South Dakota).',url:'https://www.rrc.texas.gov/'},
+  {state:'TX',cat:'pipeline',path:'federal',title:'PHMSA 49 CFR Part 195 — CO₂ Pipeline Safety',agency:'PHMSA / DOT',body:'Federal pipeline safety standards for CO₂ transported in supercritical state. NPRM (Jan 2025) proposes first-ever gaseous CO₂ standards, enhanced leak detection, vapor dispersion analysis, emergency response coordination, 48-inch minimum cover depth. Under Trump administration review. Applies to all interstate and intrastate CO₂ pipelines.',url:'https://www.phmsa.dot.gov/'},
+  {state:'TX',cat:'sequestration',path:'federal',title:'Section 45Q Tax Credit (OBBBA)',agency:'IRS / Treasury',body:'$85/ton for point-source capture with sequestration (with PWA compliance); $180/ton for DAC. OBBBA (July 4, 2025) achieved parity across all end-uses. 12-year credit period. Begin construction by end of 2032. Direct pay for 5 years. Transferable (except to specified foreign entities). FEOC restrictions apply. Minimum capture thresholds: 12,500 t/yr general, 18,750 t/yr power, 1,000 t/yr DAC.',url:'https://www.irs.gov/instructions/i8933'},
+  {state:'TX',cat:'sequestration',path:'federal',title:'EPA 40 CFR 146 Subpart H — Class VI Well Standards',agency:'EPA',body:'Federal minimum standards for Class VI wells: site characterization, computational modeling of AoR, well construction (tubing/packing/cement), MIT requirements, injection well monitoring, emergency/remedial response, well plugging, PISC (minimum 50 years default, adjustable), financial responsibility. Texas RRC program must meet or exceed these standards.',url:'https://www.epa.gov/uic/class-vi-wells-used-geologic-sequestration-co2'},
+  {state:'TX',cat:'sequestration',path:'federal',title:'EPA Subpart RR — GHG Reporting for CCS',agency:'EPA',body:'Mandatory GHG reporting under 40 CFR Part 98 Subpart RR for facilities injecting CO₂ for geologic sequestration. Requires EPA-approved MRV plan. Annual reports on CO₂ received, injected, produced, emitted to atmosphere, and sequestered in subsurface. Critical for 45Q tax credit substantiation.',url:'https://www.epa.gov/ghgreporting/subpart-rr'},
+  {state:'TX',cat:'capture',path:'federal',title:'NEPA — Environmental Review for CCS',agency:'EPA / DOE / Federal Agencies',body:'National Environmental Policy Act review required for federal actions: EPA-issued Class VI permits (pre-primacy), DOE-funded CCS projects, projects on federal land. Environmental Impact Statement (EIS) or Environmental Assessment (EA) may be required. Categorical exclusions may apply for certain activities.',url:'https://www.epa.gov/nepa'},
+
+  // ============ LOUISIANA ============
+  {state:'LA',cat:'sequestration',path:'classvi',title:'LAC 43:XVII — Class VI UIC Rules (LDCE)',agency:'Louisiana Dept. of Conservation & Energy',body:'Louisiana Administrative Code Title 43, Part XVII, Subpart 6 (Statewide Order 29-N-6) implements Class VI program under state primacy (granted Jan 2024). Requires comprehensive permit application per LAC 43:XVII.3605-3611. LDCE technical review, public hearing stages. Standard 2-year processing timeframe. Quarterly injection reports required (volume, pressure, stream composition). 24-hour incident reporting for USDW endangerment.',url:'https://www.dnr.louisiana.gov/'},
+  {state:'LA',cat:'sequestration',path:'state',title:'Louisiana Geologic Sequestration of CO₂ Act (R.S. 30:1101 et seq.)',agency:'Louisiana Legislature',body:'Act 517 (2009) — foundation statute granting LDCE authority over CCS. Establishes permitting framework, site assessment requirements, operational standards, monitoring, and closure. Commissioner of Conservation must approve geologic storage projects and determine reservoir suitability. Establishes Carbon Dioxide Geologic Storage Trust Fund for long-term stewardship.',url:'https://legis.la.gov/'},
+  {state:'LA',cat:'sequestration',path:'state',title:'Liability Transfer Mechanism (R.S. 30:1109)',agency:'LDCE',body:'Louisiana provides a statutory mechanism for operators to transfer long-term liability to the state after cessation of injection and site closure, provided: trust fund is adequately funded, technical requirements met, LDCE certifies closure complete. State assumes responsibility for monitoring, remediation, and third-party claims post-transfer. Upheld by Fifth Circuit (Deep South v. EPA, 2025).',url:'https://legis.la.gov/'},
+  {state:'LA',cat:'sequestration',path:'state',title:'Class VI Moratorium — EO JML 25-119 (Oct 2025)',agency:'Governor Jeff Landry',body:'Indefinite moratorium on NEW Class VI applications submitted after Oct 15, 2025. Five priority projects proceeding (Hackberry, Capio Sherburne, and others). Purpose: streamline permitting, prioritize economic benefit projects, enhance public engagement and local government input. LDCE Guidance B-2025-01 establishes review criteria. Despite moratorium, Executive Order affirms state support for CCS industry.',url:'https://gov.louisiana.gov/'},
+  {state:'LA',cat:'sequestration',path:'state',title:'Acts 407, 414, 458 (2025 Regular Session)',agency:'Louisiana Legislature',body:'Act 407: Requires LDCE to give "substantial consideration" to local government comments on CCS projects. Act 414: Enhances landowner notification requirements, establishes Landowner Bill of Rights for Geologic Sequestration. Act 458 (SB 244): Strengthens transparency in Class VI permitting process. These Acts codify enhanced public participation beyond federal minimums.',url:'https://legis.la.gov/'},
+  {state:'LA',cat:'pipeline',path:'state',title:'Eminent Domain Restrictions for CO₂ Pipelines (June 2025)',agency:'Louisiana Legislature',body:'Louisiana enacted legislation in June 2025 restricting eminent domain authority to "common carrier" CO₂ pipeline projects only — effectively excluding pipelines with capacity committed to a limited group of shippers. Additional pending bills: HB 7 (eliminate eminent domain for CCS entirely), HB 5 (parish-level opt-out elections), HB 6 (Rapides Parish specific).',url:'https://legis.la.gov/'},
+  {state:'LA',cat:'pipeline',path:'state',title:'Coastal Use Permits for CCS Infrastructure',agency:'LDCE / Coastal Management Division',body:'CCS projects within Louisiana\'s coastal zone require Coastal Use Permits under the State and Local Coastal Resources Management Act. Applies to pipelines, well pads, and associated infrastructure. Additional coordination with U.S. Fish & Wildlife Service for threatened/endangered species analysis.',url:'https://www.dnr.louisiana.gov/'},
+  {state:'LA',cat:'capture',path:'state',title:'LDEQ Air Quality Permits',agency:'Louisiana Dept. of Environmental Quality',body:'Capture and compression facilities require LDEQ air quality permits. Part 70 (Title V) operating permits for major sources. Toxic Air Pollutant emission limits. Louisiana Pollutant Discharge Elimination System (LPDES) permits for water discharges. Solid and hazardous waste permits for captured impurities.',url:'https://www.deq.louisiana.gov/'},
+  {state:'LA',cat:'sequestration',path:'state',title:'Pore Space Ownership — Louisiana Civil Code Art. 490',agency:'Louisiana Courts',body:'Under Louisiana Civil Code Article 490, the landowner owns "everything above and below" the surface. Generally interpreted as vesting pore space rights in the surface owner. However, litigation ongoing: Save My Louisiana v. State challenges constitutionality of statutes permitting CCS on unwilling landowners\' property. Expropriation procedures under Geologic Sequestration Act being contested.',url:'https://legis.la.gov/'},
+  {state:'LA',cat:'sequestration',path:'federal',title:'Section 45Q Tax Credit (OBBBA)',agency:'IRS / Treasury',body:'$85/ton (point-source + PWA) / $180/ton (DAC + PWA). Parity for all end-uses including EOR. Louisiana CCS projects eligible for full credit rates. Direct pay available for 5 years. Critical financial driver for Gulf Coast CCS investment. Combined with state liability transfer, creates attractive investment framework.',url:'https://www.irs.gov/instructions/i8933'},
+  {state:'LA',cat:'pipeline',path:'federal',title:'PHMSA 49 CFR Part 195 — CO₂ Pipeline Safety',agency:'PHMSA / DOT',body:'Federal pipeline safety standards apply to Louisiana CO₂ pipelines. NPRM (Jan 2025) proposes enhanced requirements including gaseous CO₂ standards. Lessons from 2020 Satartia, MS pipeline rupture (45 hospitalized) directly informed proposed regulations. Louisiana has significant existing CO₂ pipeline infrastructure for EOR operations.',url:'https://www.phmsa.dot.gov/'},
+  {state:'LA',cat:'capture',path:'federal',title:'EPA NSPS / CAA for Capture Facilities',agency:'EPA / LDEQ',body:'New Source Performance Standards and Clean Air Act requirements apply to capture facilities. PSD/NSR permits required for major sources. GHG reporting under 40 CFR Part 98. LDEQ administers federal programs under delegation. Capture facilities at refineries and petrochemical plants face additional MACT standards.',url:'https://www.epa.gov/stationary-sources-air-pollution'},
+
+  // ============ CALIFORNIA ============
+  {state:'CA',cat:'sequestration',path:'classvi',title:'EPA Region 9 — Class VI UIC Permits',agency:'EPA Region 9 (San Francisco)',body:'California has NOT applied for Class VI primacy. All Class VI wells permitted directly by EPA Region 9 (Ground Water Office, 75 Hawthorne St, San Francisco). California has the second-largest number of pending Class VI applications at EPA (~20). SB 905 raised the primacy question but left it unresolved — which agency (CalGEM, CARB, or CNRA) should assume responsibility if California pursued primacy.',url:'https://www.epa.gov/uic/class-vi-wells-used-geologic-sequestration-co2'},
+  {state:'CA',cat:'sequestration',path:'state',title:'SB 905 — CCS Regulatory Framework (2022)',agency:'California Legislature',body:'Senate Bill 905 (Caballero/Skinner) established the foundation for CCS regulation in California. Authorized CARB, CNRA, and DOC to develop rules by Jan 1, 2025. Directs CARB to establish safety and viability standards, minimize co-pollutant emissions, address seismic risk. Created Geologic Carbon Sequestration Group (led by CA Geological Survey) to identify suitable storage sites — reservoirs modeled to maintain integrity for 1,000+ years. Imposed CO₂ pipeline moratorium pending PHMSA rulemaking.',url:'https://leginfo.legislature.ca.gov/'},
+  {state:'CA',cat:'sequestration',path:'state',title:'LCFS CCS Protocol — Permanence Certification',agency:'CARB',body:'California Air Resources Board\'s CCS Protocol under the Low Carbon Fuel Standard (17 CCR §95480-95503) establishes Permanence Certification requirements: detailed site characterization, risk assessment, third-party review, testing and monitoring plans, quarterly reporting. Projects must demonstrate CO₂ permanence for crediting. CCS credits generated by capture facility (not storage site). DAC projects may apply for Permanence Certification regardless of location.',url:'https://ww2.arb.ca.gov/resources/documents/carbon-capture-and-sequestration-project-application'},
+  {state:'CA',cat:'capture',path:'state',title:'LCFS Amendments (July 2025) — CI Benchmarks',agency:'CARB',body:'OAL approved LCFS amendments effective July 1, 2025. Carbon intensity reduction targets increased: 30% by 2030, 90% by 2045 (from 2010 baseline). 9% one-time CI stepdown in 2025. Automatic Acceleration Mechanism (AAM) for further reductions. Hydrogen produced with CCS counts toward 80% renewable hydrogen requirement by 2030. CCS-derived fuels excluded from fossil hydrogen phaseout by 2035. LCFS credits: significant revenue stream for CCS projects ($50-200+/credit historically).',url:'https://ww2.arb.ca.gov/our-work/programs/low-carbon-fuel-standard'},
+  {state:'CA',cat:'capture',path:'state',title:'AB 32 / Cap-and-Trade Program',agency:'CARB',body:'California\'s cap-and-trade program covers major GHG emitters. CCS projects may generate offset credits under approved protocols. AB 32 requires GHG reductions be "real, permanent, additional, quantifiable, verifiable, and enforceable." CCS counted as eligible compliance pathway. Carbon allowance prices create additional economic driver for capture.',url:'https://ww2.arb.ca.gov/our-work/programs/cap-and-trade-program'},
+  {state:'CA',cat:'pipeline',path:'state',title:'SB 905 — CO₂ Pipeline Moratorium',agency:'California Legislature / CNRA',body:'SB 905 prohibits intrastate CO₂ pipeline operation until PHMSA concludes its rulemaking on minimum federal safety standards. CNRA directed to develop state framework for CO₂ pipeline design, operation, siting, and maintenance. Major obstacle: PHMSA rulemaking may take years. Critical bottleneck for scaling California CCS — pipeline infrastructure this decade essential for 100 Mt/yr target.',url:'https://leginfo.legislature.ca.gov/'},
+  {state:'CA',cat:'sequestration',path:'state',title:'CalGEM — Geologic Energy Management',agency:'CA Dept. of Conservation / CalGEM',body:'CalGEM (Geologic Energy Management Division) oversees oil and gas well operations including CO₂-EOR injection wells (Class II). CalGEM coordinates with EPA on Class VI well oversight. AB 1925 required CalGEM and CA Geological Survey to assess geologic sequestration potential. Phase I report completed. Storage potential: Central Valley, offshore basins, depleted oil fields.',url:'https://www.conservation.ca.gov/calgem/'},
+  {state:'CA',cat:'capture',path:'state',title:'CEQA — Environmental Review',agency:'CARB / Lead Agency',body:'California Environmental Quality Act applies to all discretionary state and local approvals for CCS projects. Full Environmental Impact Report (EIR) likely required for CCS facilities and pipelines. CEQA litigation ongoing: environmental groups challenged LCFS amendments in 2024-2025. Significant addition to federal NEPA requirements.',url:'https://opr.ca.gov/ceqa/'},
+  {state:'CA',cat:'sequestration',path:'state',title:'2022 Scoping Plan — 100 Mt/yr CCS Target',agency:'CARB',body:'CARB\'s 2022 Scoping Plan identifies CCS as providing ~25% of California\'s net-zero portfolio by 2045 — approximately 100 million tons per year. Despite this target, zero operating CCS projects currently in California. Primary barrier: lack of completed regulatory framework. ~30 CCS projects operating worldwide but none in California.',url:'https://ww2.arb.ca.gov/our-work/programs/ab-32-climate-change-scoping-plan'},
+  {state:'CA',cat:'sequestration',path:'federal',title:'Section 45Q Tax Credit (OBBBA)',agency:'IRS / Treasury',body:'$85/ton (point-source + PWA) / $180/ton (DAC + PWA). California projects eligible. Combined with LCFS credits ($50-200+/ton), California offers potentially the highest total CCS revenue stack globally. However, regulatory uncertainty and pipeline moratorium significantly impede project development.',url:'https://www.irs.gov/instructions/i8933'},
+  {state:'CA',cat:'capture',path:'federal',title:'EPA Clean Air Act — Title V / NSR',agency:'EPA / CARB / Air Districts',body:'California\'s local air quality management districts (e.g., SCAQMD, BAAQMD) administer CAA permits. Some of the strictest air quality standards in the nation. Capture facilities must meet state and local emission limits in addition to federal standards. Co-pollutant reduction requirements under SB 905.',url:'https://www.epa.gov/caa-permitting'},
+
+  // ============ ILLINOIS ============
+  {state:'IL',cat:'sequestration',path:'classvi',title:'EPA Region 5 — Class VI UIC Permits',agency:'EPA Region 5 (Chicago)',body:'Illinois does NOT have and is NOT pursuing Class VI primacy. EPA Region 5 retains permitting authority. ADM Decatur projects received Class VI permits from EPA (Dec 2014 — among the first Class VI permits issued in the US). SAFE CCS Act explicitly keeps EPA Region 5 as Class VI authority while adding state-level requirements on top.',url:'https://www.epa.gov/uic/class-vi-wells-used-geologic-sequestration-co2'},
+  {state:'IL',cat:'sequestration',path:'state',title:'SAFE CCS Act (eff. Jan 1, 2025)',agency:'Illinois Legislature / IL EPA',body:'Safety and Aid for the Environment in Carbon Capture and Sequestration Act. Comprehensive state-level CCS regulatory framework IN ADDITION to federal Class VI requirements. Key provisions: (1) State sequestration permit required from IL EPA before construction; (2) Pore space belongs to surface owner, 75% landowner consent required; (3) Unitization petition to IDNR if holdouts; (4) Operator retains all liability (no state assumption); (5) Financial assurance required; (6) Water resource impact evaluation; (7) Long-term monitoring and reporting.',url:'https://epa.illinois.gov/about-us/rules-regs/new-and-proposed-rules/illinois-safe-carbon-capture-sequestration-act.html'},
+  {state:'IL',cat:'pipeline',path:'state',title:'CO₂ Transportation and Sequestration Act (220 ILCS 75)',agency:'Illinois Commerce Commission (ICC)',body:'Requires "certificate of authority" from ICC to construct and operate CO₂ pipelines in Illinois. SAFE CCS Act amended this statute significantly. Two-year moratorium on new CO₂ pipeline construction (until PHMSA finalizes safety rules or approximately July 2026). Bills pending (2025 session) to allow pipelines to proceed after July 2026 even without updated PHMSA rules. CO₂ Pipeline Fund proposed.',url:'https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3379&ChapterID=23'},
+  {state:'IL',cat:'sequestration',path:'state',title:'Emergency Response Planning — SAFE CCS Act',agency:'IL Emergency Management Agency (IEMA)',body:'SAFE CCS Act assigns CCS emergency response authority to IEMA. Requires detailed emergency response plans from operators. IEMA provided resources for enhanced training, oversight, and enforcement. Addresses concerns raised by 2020 Satartia, MS CO₂ pipeline failure and 2024 ADM Decatur facility incident.',url:'https://epa.illinois.gov/'},
+  {state:'IL',cat:'sequestration',path:'state',title:'Champaign County CCS Moratorium (Jan 2025)',agency:'Champaign County Board',body:'Champaign County Zoning Ordinance No. 2025-1 imposed a 12-month moratorium on carbon sequestration activities near the Mahomet Aquifer. Prompted by ADM Decatur CO₂ leak incident (2024). HB 5874 (2024 session, not enacted) sought statewide prohibition on CCS near sole-source aquifers. Local opposition growing in central Illinois communities.',url:'https://co.champaign.il.us/'},
+  {state:'IL',cat:'capture',path:'state',title:'IL EPA Air Quality Permits',agency:'Illinois EPA',body:'Capture facilities require IL EPA air quality permits: Construction Permits (new sources), Operating Permits (Title V), Federally Enforceable State Operating Permits (FESOP). Illinois attainment/nonattainment designations affect NSR applicability. Chicago metro area historically nonattainment for ozone — may impact capture facility permitting.',url:'https://epa.illinois.gov/topics/air-quality/permits.html'},
+  {state:'IL',cat:'sequestration',path:'state',title:'Illinois Basin Storage Capacity',agency:'Illinois State Geological Survey (ISGS)',body:'Illinois Basin offers ~150 Gt of CO₂ storage capacity. Mt. Simon Sandstone: primary target formation (depth 2,000-7,000 ft, porosity <20%, permeability ~26 mD). Overlying Eau Claire Shale seal (100-150m thick, no resolvable faulting). ISGS has conducted extensive characterization through DOE-funded CarbonSAFE and RCSP programs. ADM project demonstrated successful injection and containment of 1 Mt+.',url:'https://isgs.illinois.edu/'},
+  {state:'IL',cat:'capture',path:'state',title:'Climate and Equitable Jobs Act (CEJA)',agency:'Illinois Legislature',body:'Illinois CEJA (2021) provides the broader climate framework. CCS identified as critical component for industrial decarbonization. University of Illinois estimates CCS development could generate $3.3B in regional value and 14,000+ jobs. CEJA\'s clean energy transition goals create demand for CCS as compliance pathway for industrial emitters.',url:'https://www.ilga.gov/'},
+  {state:'IL',cat:'sequestration',path:'federal',title:'Section 45Q Tax Credit (OBBBA)',agency:'IRS / Treasury',body:'$85/ton (point-source + PWA) / $180/ton (DAC + PWA). ADM Decatur project was among the first to utilize 45Q. Illinois ethanol plants are primary candidates for CCS + 45Q. SAFE CCS Act requirements add time and cost but do not disqualify from federal credits.',url:'https://www.irs.gov/instructions/i8933'},
+  {state:'IL',cat:'pipeline',path:'federal',title:'PHMSA 49 CFR Part 195 — CO₂ Pipeline Safety',agency:'PHMSA / DOT',body:'Federal pipeline safety standards. Illinois SAFE CCS Act pipeline moratorium explicitly tied to PHMSA rulemaking completion. 2025 Illinois bills propose allowing pipelines post-July 2026 regardless of PHMSA status. Satartia incident (2020) was key driver of Illinois pipeline restrictions.',url:'https://www.phmsa.dot.gov/'},
+
+  // ============ NORTH DAKOTA ============
+  {state:'ND',cat:'sequestration',path:'classvi',title:'NDAC 43-05 / NDCC 38-22 — Class VI Program',agency:'ND Industrial Commission / Dept. of Mineral Resources',body:'North Dakota\'s Class VI program is the oldest state-administered program in the US (primacy granted April 24, 2018). NDAC Article 43-05 implements Class VI requirements at least as stringent as federal standards. Two-step process: (1) Storage Facility Permit (SFP) approved by NDIC orders — authorizes facility creation, pore space amalgamation, and financial responsibility; (2) Class VI well permit for each injection well. Monthly Form 26/26A injection reporting required.',url:'https://www.dmr.nd.gov/dmr/oilgas/ClassVI'},
+  {state:'ND',cat:'sequestration',path:'state',title:'NDCC 47-31.1 — Pore Space Ownership',agency:'ND Legislature',body:'North Dakota statute explicitly vests pore space ownership in the surface estate owner. Severance of pore space from the surface estate is PROHIBITED by law — unlike most other states. Pore space can be leased but not permanently conveyed separately. This provides certainty but also means surface owners cannot sell pore space rights outright to CCS developers.',url:'https://www.legis.nd.gov/'},
+  {state:'ND',cat:'sequestration',path:'state',title:'Pore Space Amalgamation — 60% Consent',agency:'NDIC',body:'North Dakota law authorizes NDIC to force the amalgamation of pore space interests when the storage operator has obtained consent from owners of at least 60% of the pore space interest within the designated area. Non-consenting owners receive compensation. NDIC issues amalgamation orders as part of the Storage Facility Permit process. Red Trail Energy and Minnkota/Project Tundra both obtained amalgamation orders.',url:'https://www.dmr.nd.gov/'},
+  {state:'ND',cat:'sequestration',path:'state',title:'Long-Term Liability Transfer (10-Year Post-Closure)',agency:'NDIC / State of North Dakota',body:'North Dakota provides a statutory mechanism for transferring long-term liability to the state: after injection ceases, operator maintains site for specified post-closure period (~10 years), then may petition NDIC for certificate of project completion. Upon certification, title to stored CO₂ and responsibility transfers to the state. Trust fund/financial assurance mechanism funds long-term stewardship.',url:'https://www.legis.nd.gov/'},
+  {state:'ND',cat:'sequestration',path:'state',title:'ND CCS Regulations — First in Nation (April 2010)',agency:'NDIC',body:'North Dakota promulgated the first-ever state CCS regulations on April 1, 2010 — predating the federal Class VI rule (Dec 2010). Established comprehensive framework for site characterization, permitting, monitoring, reporting, closure, and long-term stewardship. Foundation for subsequent primacy application.',url:'https://www.dmr.nd.gov/'},
+  {state:'ND',cat:'capture',path:'state',title:'ND Industrial Commission — Capture Facility Oversight',agency:'NDIC / ND Dept. of Environmental Quality',body:'NDIC has jurisdiction over oil and gas resources, geologic information, and CO₂ underground storage. ND DEQ handles air quality permits for capture facilities. Ethanol plants (Red Trail Energy, Blue Flint) are primary capture sources. Lignite coal power plants targeted by Project Tundra (4 Mt/yr from Milton R. Young Station).',url:'https://deq.nd.gov/'},
+  {state:'ND',cat:'pipeline',path:'state',title:'CO₂ Pipeline Regulation & Summit Controversy',agency:'NDIC / ND PSC',body:'North Dakota regulates CO₂ pipelines through existing pipeline authority. Summit Carbon Solutions proposed terminus in ND for its 2,500-mile pipeline from midwest ethanol plants. Cross-border tensions with South Dakota after SD banned eminent domain for CO₂ pipelines (2025). ND considered lawsuit against SD law. Multiple 2025 bills to restrict or block Summit project debated but failed. ND generally supportive of CCS infrastructure.',url:'https://www.psc.nd.gov/'},
+  {state:'ND',cat:'sequestration',path:'state',title:'Active CCS Projects & Track Record',agency:'NDIC / DMR',body:'4 approved CCS facilities under state primacy: (1) Red Trail Energy — 180k t/yr from ethanol, injecting since June 2022, Broom Creek Formation; (2) Project Tundra (Minnkota Power) — 4 Mt/yr from lignite power plant, Broom Creek & Deadwood Formations; (3) Blue Flint Ethanol — McLean County; (4) Fourth facility approved. 8 Class VI permits issued total. North Dakota is the operational proving ground for state-administered CCS permitting.',url:'https://www.ndic.nd.gov/'},
+  {state:'ND',cat:'sequestration',path:'federal',title:'Section 45Q Tax Credit (OBBBA)',agency:'IRS / Treasury',body:'$85/ton (point-source + PWA) / $180/ton (DAC + PWA). Red Trail Energy was among early 45Q claimants. North Dakota\'s clear regulatory framework (primacy + pore space + liability transfer) combined with 45Q creates the most complete CCS investment environment in the US. PCOR Partnership has done extensive research on CCS economics with 45Q.',url:'https://www.irs.gov/instructions/i8933'},
+  {state:'ND',cat:'capture',path:'federal',title:'DOE CarbonSAFE Program',agency:'U.S. Department of Energy / NETL',body:'DOE CarbonSAFE program has funded extensive storage site characterization in North Dakota. PCOR Partnership (Energy & Environmental Research Center, UND) has been primary research vehicle. Project Tundra received significant DOE Phase III funding. Note: Trump administration terminated 24 DOE CCS projects in May 2025 — impact on ND projects under review.',url:'https://www.energy.gov/fecm/carbon-storage-assurance-facility-enterprise-carbonsafe'},
+
+  // ============ SOUTH DAKOTA ============
+  {state:'SD',cat:'pipeline',path:'state',title:'HB 1052 — Eminent Domain Ban for CO₂ Pipelines (March 2025)',agency:'SD Legislature / Governor Rhoden',body:'Signed March 6, 2025. Prohibits carbon pipeline developers from using eminent domain to acquire land. Culmination of 4-year grassroots movement against Summit Carbon Solutions\' proposed $9B pipeline. Senate voted 23-12, House passed in January. Governor Rhoden: "South Dakota landowners feel strongly that the threat of involuntary easements infringes on their freedoms and property rights." Companion HJR 5001 would constitutionally enshrine the ban.',url:'https://sdlegislature.gov/'},
+  {state:'SD',cat:'pipeline',path:'state',title:'PUC Pipeline Permit — Summit Denied (April 2025)',agency:'SD Public Utilities Commission',body:'South Dakota PUC denied Summit Carbon Solutions\' CO₂ pipeline permit in April 2025. Summit had filed application in November 2024 but requested indefinite extension after eminent domain ban passage. Commissioners expressed doubts about route viability: "At this point, we really don\'t know the route. We don\'t know the timeframes." Summit must now rely entirely on voluntary easements to complete South Dakota segment.',url:'https://puc.sd.gov/'},
+  {state:'SD',cat:'pipeline',path:'state',title:'2024 Referendum & Political Upheaval',agency:'SD Voters / Legislature',body:'In 2024, lawmakers passed a compromise bill with CO₂ pipeline restrictions but no eminent domain ban. Voters referred it to the ballot and defeated it. 14 Republican legislative incumbents lost their primary seats over the CCS eminent domain issue. 2025 Legislature installed pipeline opponents in leadership positions. Navigator CO₂ canceled its $3B pipeline project in Oct 2023 citing "unpredictable regulatory processes in South Dakota and Iowa."',url:'https://sdlegislature.gov/'},
+  {state:'SD',cat:'sequestration',path:'state',title:'Minimal CCS Regulatory Framework',agency:'SD DENR / PUC',body:'South Dakota has no comprehensive CCS regulatory framework. No specific pore space ownership statute. No CCS-specific liability or trust fund mechanism. No state permitting requirements for sequestration beyond federal Class VI. State primarily positioned as pipeline transit corridor for CO₂ transport to North Dakota storage. Limited in-state geologic storage potential.',url:'https://denr.sd.gov/'},
+  {state:'SD',cat:'sequestration',path:'classvi',title:'EPA Region 8 — Class VI UIC (if applicable)',agency:'EPA Region 8',body:'No Class VI primacy and no primacy application. Any Class VI wells in South Dakota would be permitted by EPA Region 8. However, SD is not currently targeted as a storage destination — its role in CCS has been primarily as a pipeline transit state for the Summit Carbon Solutions project carrying CO₂ to North Dakota.',url:'https://www.epa.gov/uic'},
+  {state:'SD',cat:'capture',path:'state',title:'Ethanol Plant CO₂ Capture Potential',agency:'SD DENR',body:'South Dakota has multiple ethanol production facilities that generate high-purity CO₂ suitable for capture. These plants were targeted by Summit Carbon Solutions for its pipeline network. Federal 45Q credits make ethanol CCS economically attractive. However, the eminent domain ban and pipeline permit denial have stalled development. Some facilities may explore alternative transport or in-state storage options.',url:'https://denr.sd.gov/'},
+  {state:'SD',cat:'pipeline',path:'federal',title:'PHMSA Pipeline Safety & Federal Preemption Debate',agency:'PHMSA / Congress',body:'OBBBA initially included a provision (§41006) giving FERC siting authority over interstate CO₂ pipelines — which would have preempted South Dakota\'s eminent domain ban. This provision was stripped from the final version after bipartisan opposition citing Midwestern state sovereignty. Debate over federal CO₂ pipeline siting authority ongoing in Congress. PHMSA safety rulemaking (Jan 2025 NPRM) continues separately from siting authority questions.',url:'https://www.phmsa.dot.gov/'},
+  {state:'SD',cat:'sequestration',path:'federal',title:'Section 45Q Tax Credit (OBBBA)',agency:'IRS / Treasury',body:'$85/ton (point-source + PWA) / $180/ton (DAC + PWA). South Dakota ethanol facilities eligible for 45Q but face infrastructure challenges (no pipeline, no in-state storage). 45Q\'s billions in potential credits were a key argument FOR pipeline development. Eminent domain ban may redirect projects to states with clearer regulatory pathways.',url:'https://www.irs.gov/instructions/i8933'},
+];
+
+// ==========================================
+// APP LOGIC
+// ==========================================
+let activeState = 'TX';
+let activeCat = 'all';
+let activePath = 'all';
+let searchTerm = '';
+let allExpanded = false;
+
+function init() {
+  renderStateGrid();
+  renderStateInfo();
+  renderRegs();
+  bindEvents();
+  document.getElementById('totalRegCount').textContent = REGS.length;
+}
+
+function renderStateGrid() {
+  const grid = document.getElementById('stateGrid');
+  grid.innerHTML = Object.entries(STATES).map(([key, s]) => `
+    <div class="state-card ${key === activeState ? 'active' : ''}" data-state="${key}" style="--state-accent:${s.accent}">
+      <div class="state-card-header">
+        <span class="state-name">${s.name}</span>
+        <span class="state-flag">${s.flag}</span>
+      </div>
+      <span class="primacy-badge ${s.primacy}">${s.primacyLabel}</span>
+      <div class="state-meta">${s.primacyDate}</div>
+    </div>
+  `).join('');
+}
+
+function renderStateInfo() {
+  const panel = document.getElementById('stateInfoPanel');
+  const s = STATES[activeState];
+  if (!s) { panel.classList.remove('visible'); return; }
+  panel.classList.add('visible');
+  const stateRegs = REGS.filter(r => r.state === activeState);
+  panel.innerHTML = `
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-title">Regulator</div>
+        <div class="info-card-value" style="font-size:16px;">${s.regulator}</div>
+        <div class="info-card-detail"><a href="${s.regulatorUrl}" target="_blank">Official Website →</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Class VI Status</div>
+        <div class="info-card-value" style="font-size:16px;">${s.primacyLabel}</div>
+        <div class="info-card-detail">${s.primacyDate}</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Pore Space Ownership</div>
+        <div class="info-card-value" style="font-size:14px;">${s.poreSpace}</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Long-Term Liability</div>
+        <div class="info-card-value" style="font-size:14px;">${s.liability}</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Storage Capacity</div>
+        <div class="info-card-value" style="font-size:14px;">${s.storageCapacity}</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Key Projects</div>
+        <div class="info-card-value" style="font-size:14px;">${s.keyProjects}</div>
+      </div>
+      <div class="info-card" style="grid-column: 1 / -1;">
+        <div class="info-card-title">Key Notes & Recent Developments</div>
+        <div class="info-card-detail">${s.notes}</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);">
+      ${stateRegs.length} regulations catalogued for ${s.name}
+    </div>
+  `;
+}
+
+function renderRegs() {
+  const list = document.getElementById('regList');
+  const filtered = REGS.filter(r => {
+    if (r.state !== activeState) return false;
+    if (activeCat !== 'all' && r.cat !== activeCat) return false;
+    if (activePath !== 'all' && r.path !== activePath) return false;
+    if (searchTerm) {
+      const s = searchTerm.toLowerCase();
+      return (r.title + r.agency + r.body + r.cat + r.path).toLowerCase().includes(s);
+    }
+    return true;
+  });
+
+  document.getElementById('regCount').textContent = `${filtered.length} of ${REGS.filter(r=>r.state===activeState).length} regulations`;
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-dim);">No regulations match the current filters.</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map((r, i) => `
+    <div class="reg-card ${allExpanded ? 'open' : ''}" data-idx="${i}">
+      <div class="reg-card-header" onclick="toggleCard(this)">
+        <span class="reg-expand">▶</span>
+        <div class="reg-header-content">
+          <div class="reg-title">${r.title}</div>
+          <div class="reg-agency">${r.agency}</div>
+        </div>
+        <div class="reg-tags">
+          <span class="reg-tag ${r.cat}">${r.cat}</span>
+          <span class="reg-tag ${r.path}">${r.path === 'classvi' ? 'Class VI' : r.path}</span>
+        </div>
+      </div>
+      <div class="reg-body">
+        ${r.body}
+        ${r.url ? `<br><a class="reg-link" href="${r.url}" target="_blank" rel="noopener">Official Source →</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(el) {
+  el.closest('.reg-card').classList.toggle('open');
+}
+
+function bindEvents() {
+  // State selection
+  document.getElementById('stateGrid').addEventListener('click', e => {
+    const card = e.target.closest('.state-card');
+    if (!card) return;
+    activeState = card.dataset.state;
+    document.querySelectorAll('.state-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    renderStateInfo();
+    renderRegs();
+  });
+
+  // Category tabs
+  document.getElementById('catTabs').addEventListener('click', e => {
+    if (!e.target.classList.contains('nav-tab')) return;
+    activeCat = e.target.dataset.cat;
+    document.querySelectorAll('#catTabs .nav-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    renderRegs();
+  });
+
+  // Pathway tabs
+  document.getElementById('pathTabs').addEventListener('click', e => {
+    if (!e.target.classList.contains('nav-tab')) return;
+    activePath = e.target.dataset.path;
+    document.querySelectorAll('#pathTabs .nav-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    renderRegs();
+  });
+
+  // Search
+  document.getElementById('searchBox').addEventListener('input', e => {
+    searchTerm = e.target.value;
+    renderRegs();
+  });
+
+  // Expand/Collapse
+  document.getElementById('expandAll').addEventListener('click', () => {
+    allExpanded = true;
+    document.querySelectorAll('.reg-card').forEach(c => c.classList.add('open'));
+  });
+  document.getElementById('collapseAll').addEventListener('click', () => {
+    allExpanded = false;
+    document.querySelectorAll('.reg-card').forEach(c => c.classList.remove('open'));
+  });
+
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+}
+
+init();
+</script>
+</body>
+</html>
